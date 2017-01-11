@@ -32,9 +32,9 @@ $(function() {
          * and that the URL is not empty.
          */
         it('url defined', function() {
-            for(var x = 0; x < allFeeds.length; x++) {
-                   expect(allFeeds[x].url).toBeDefined();
-                   expect(allFeeds[x].url.length).not.toBe(0);
+            for(var i = 0; i < allFeeds.length; i++) {
+                   expect(allFeeds[i].url).toBeDefined();
+                   expect(allFeeds[i].url.length).not.toBe(0);
             }
         });
 
@@ -43,9 +43,9 @@ $(function() {
          * and that the name is not empty.
          */
         it('name defined', function() {
-            for(var x = 0; x < allFeeds.length; x++) {
-                   expect(allFeeds[x].name).toBeDefined();
-                   expect(allFeeds[x].name.length).not.toBe(0);
+            for(var i = 0; i < allFeeds.length; i++) {
+                   expect(allFeeds[i].name).toBeDefined();
+                   expect(allFeeds[i].name.length).not.toBe(0);
             }
         });
    });
@@ -63,7 +63,7 @@ $(function() {
              *When menuIcon is clicked the 'menu-hidden' class gets toggled. (app.js 131-133)
              *So check whether the body has class 'menu-hidden' initially.
              */
-            expect($ ('body').hasClass('menu-hidden')).toBe(true);
+            expect($ ('body').hasClass('menu-hidden')).toBeTruthy();
         });
 
          /* TODO: Write a test that ensures the menu changes
@@ -77,9 +77,9 @@ $(function() {
              */
             var menuIcon = $('.menu-icon-link');
             menuIcon.click();
-            expect($('body').hasClass('menu-hidden')).toBe(false);
+            expect($('body').hasClass('menu-hidden')).not.toBeTruthy()
             menuIcon.click();
-            expect($('body').hasClass('menu-hidden')).toBe(true);
+            expect($('body').hasClass('menu-hidden')).toBeTruthy();
         });
     })
 
