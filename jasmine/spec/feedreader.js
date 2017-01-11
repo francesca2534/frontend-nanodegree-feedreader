@@ -31,42 +31,102 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
-
+        it('url defined', function() {
+            for(var x = 0; x < allFeeds.length; x++) {
+                   expect(allFeeds[x].url).toBeDefined();
+                   expect(allFeeds[x].url.length).not.toBe(0);
+            }
+        });
 
         /* TODO: Write a test that loops through each feed
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
-    });
+        it('name defined', function() {
+            for(var x = 0; x < allFeeds.length; x++) {
+                   expect(allFeeds[x].name).toBeDefined();
+                   expect(allFeeds[x].name.length).not.toBe(0);
+            }
+        });
+   });
 
 
     /* TODO: Write a new test suite named "The menu" */
-
+    describe('The menu', function() {
         /* TODO: Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
          * the CSS to determine how we're performing the
          * hiding/showing of the menu element.
          */
+        it('hidden by default', function() {
+            /*Menu element is visible only when menuIcon is clicked.
+             *When menuIcon is clicked the 'menu-hidden' class gets toggled. (app.js 131-133)
+             *So check whether the body has class 'menu-hidden' initially.
+             */
+            expect($ ('body').hasClass('menu-hidden')).toBe(true);
+        });
 
          /* TODO: Write a test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
           * should have two expectations: does the menu display when
           * clicked and does it hide when clicked again.
           */
+        it('changes visibility', function() {
+            /*When the menuIcon is clicked the 'menu-hidden' class gets toggled. 
+             *So check whether the menu-hidden class is present after the click.
+             */
+            var menuIcon = $('.menu-icon-link');
+            menuIcon.click();
+            expect($('body').hasClass('menu-hidden')).toBe(false);
+            menuIcon.click();
+            expect($('body').hasClass('menu-hidden')).toBe(true);
+        });
+    })
+
+
+
 
     /* TODO: Write a new test suite named "Initial Entries" */
-
+    describe('Initial Entries', function() {
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
          * Remember, loadFeed() is asynchronous so this test will require
          * the use of Jasmine's beforeEach and asynchronous done() function.
-         */
+         */       
+        beforeEach(function(done) {
+            done();        
+        })
 
-    /* TODO: Write a new test suite named "New Feed Selection"
+        it('at least single element', function(done) {
+            /*The '.feed' container should not have a length of 0. 
+             *As it should contain atleast one '.entry' element
+             */
+            expect($('.feed').length).not.toBe(0);
+            done();
+        });
+    });
 
+
+
+    /* TODO: Write a new test suite named "New Feed Selection"*/
+    describe('New Feed Selection', function() {
         /* TODO: Write a test that ensures when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
+         */    
+        beforeEach(function(done) {
+            done();        
+        })
+        /*Check whether the '.header-title' changes on clicking tha 'a' element.
          */
+        it('content changes', function(done) {
+            var title = $('.header-title');
+            $('.feed-list li a').click();
+            var title_1 = $('.header-title');
+            expect(title).not.toBe(title_1);
+            done();
+        });
+    });    
+
 }());
