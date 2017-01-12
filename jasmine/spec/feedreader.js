@@ -96,7 +96,8 @@ $(function() {
         it('at least single element', function() {
             /*The '.feed' container should contain one '.entry' element. 
              */
-            expect($('.feed .entry-link .entry')).toBeDefined();
+            var entry = $('.feed .entry');
+            expect(entry.length).not.toBe(0);
         });
     });
 
@@ -112,16 +113,15 @@ $(function() {
             loadFeed(0, function() {
                 oldText = $('.feed .entry h2').html();
                 loadFeed(1, function() {
-                    var newText = $('.feed .entry h2').html();
                     done();
                 });
             });
         });
-        
-        /*Check whether the oldText and newText are same.
+        /*Check whether the oldText and newText are matching.
          */
         it('content changes', function(done) {
-            expect(oldText).not.toBe(newText);
+            var newText = $('.feed .entry h2').html();
+            expect(oldText).not.toMatch(newText);
             done();
         });
     });    
